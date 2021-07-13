@@ -33,7 +33,7 @@ fastify.get('/domaininfo/:domain', async (request, reply) => {
 // Run the server!
 const start = async () => {
   try {
-    await fastify.listen(3000)
+    await fastify.listen(80)
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
