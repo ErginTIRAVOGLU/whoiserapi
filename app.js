@@ -1,5 +1,6 @@
 const whoiser = require("whoiser");
 
+/*
 (async () => {
   // WHOIS info for ASN15169
   let domainInfo = await whoiser("google.com");
@@ -15,6 +16,30 @@ const whoiser = require("whoiser");
 
   console.log(whois);
 })();
+
+*/
+// Require the framework and instantiate it
+const fastify = require('fastify')({ logger: true })
+fastify.get('/', async (request, reply) => {  
+  return { data: "Hello" }
+})
+// Declare a route
+fastify.get('/domaininfo/:domain', async (request, reply) => {
+ 
+  let domainInfo = await whoiser(request.params["domain"]);
+  return { data: domainInfo }
+})
+
+// Run the server!
+const start = async () => {
+  try {
+    await fastify.listen(3000)
+  } catch (err) {
+    fastify.log.error(err)
+    process.exit(1)
+  }
+}
+start()
 /* const whoiser = require('whoiser')
 
 (async () => {
